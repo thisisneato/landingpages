@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>You Stay Zen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300..700;1,300..700&display=swap">
+<style>
+:root{
+  /* Layout: a sunlit zen courtyard. Soft ambient wash, floating frosted nav, the headline beside an arch-framed vertical film,
+     then calm sections where each character has a job (tortoise carries the stack, contortionist rides the sales line,
+     dog holds your cushion), closing on a Vault end card with the one gradient moment: "Amazon. Handled." */
+  --almond:#F8F9FB; --oat:#F9F1ED; --receipt:#F6F6F5; --vanilla:#FFFCE7; --white:#FFFFFF;
+  --flamingo:#F9BBDD; --peach:#FFC4B0; --butter:#FFF7BD; --watermelon:#FFEEF8;
+  --vault:#222223; --sesame:#6E6B66; --shroom:#A08A7F; --mocha:#D9CEC8; --line:#E4E2DE;
+  --tender:#075D44; --negative:#C0392B;
+  --font:'TWK Lausanne','Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --mono:'SF Mono','Fira Code',Menlo,Monaco,Consolas,monospace;
+  --r-card:24px; --r-hero:28px;
+  color-scheme:light;
+}
+html{background:var(--almond);scroll-padding-top:96px;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--almond);color:var(--vault);
+  font-family:var(--font);font-weight:350;font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;isolation:isolate;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+}
+/* Sanctioned ambient background, warmed toward a courtyard at golden hour */
+body::before{
+  content:"";position:fixed;inset:-15%;z-index:-1;pointer-events:none;filter:blur(70px);
+  background:
+    radial-gradient(ellipse at 88% 6%, rgba(255,247,189,.6), transparent 40%),
+    radial-gradient(ellipse at 6% 34%, rgba(249,187,221,.34), transparent 38%),
+    radial-gradient(ellipse at 84% 72%, rgba(255,196,176,.26), transparent 40%),
+    linear-gradient(160deg, rgba(249,241,237,.85), rgba(255,238,248,.6));
+}
+body::after{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:50;background:var(--almond)}
+*,*::before,*::after{box-sizing:border-box}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--vault);outline-offset:3px;border-radius:6px}
+
+.page{max-width:1240px;margin:0 auto}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- type ---------- */
+h1,h2,h3{margin:0;text-wrap:balance}
+.display-m{font-size:clamp(38px,5vw,68px);font-weight:450;letter-spacing:-.03em;line-height:1}
+.display-s{font-size:clamp(28px,3.3vw,44px);font-weight:350;letter-spacing:-.012em;line-height:1.1}
+.body-lg{font-size:clamp(17px,1.35vw,19px);color:var(--sesame);max-width:48ch;margin:0}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:10px;
+  font:600 15px/1 var(--font);letter-spacing:.01em;text-decoration:none;cursor:pointer;border:1px solid transparent;
+  transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease}
+.btn-cta{background:var(--butter);color:var(--vault);border-color:rgba(34,34,35,.14)}
+.btn-cta:hover{transform:translateY(-1px);box-shadow:0 10px 22px -8px rgba(160,138,127,.55)}
+.btn-ghost{background:transparent;color:var(--vault);border-color:var(--vault)}
+.btn-ghost:hover{background:var(--vault);color:var(--white)}
+.btn svg{flex:none}
+
+
+/* ---------- nav ---------- */
+.nav{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 12px);z-index:30;max-width:980px;margin:16px auto 0;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px;border-radius:22px;
+  background:rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.95);outline:1px solid rgba(228,226,222,.7);
+  box-shadow:0 8px 32px rgba(34,34,35,.08);-webkit-backdrop-filter:blur(28px) saturate(1.4);backdrop-filter:blur(28px) saturate(1.4)}
+.nav .btn-cta{min-height:44px;border-radius:16px;padding:0 18px;font-size:14px}
+.logo{display:inline-flex;align-items:center;height:44px;padding:0 12px;border-radius:14px;color:var(--vault);text-decoration:none}
+.logo svg{display:block;width:119px;height:26px}
+
+/* ---------- hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(36px,5vw,72px);align-items:center;
+  padding-block:clamp(44px,7vw,96px) clamp(40px,5vw,72px)}
+.hero-copy{display:grid;gap:26px;justify-items:start;min-width:0}
+.hero h1{font-size:clamp(68px,10.4vw,150px);font-weight:450;letter-spacing:-.055em;line-height:.9}
+.hero h1 .dot{color:var(--flamingo)}
+.lede{margin:0;font-size:clamp(21px,2vw,27px);line-height:1.35;letter-spacing:-.01em;max-width:26ch}
+.lede em{font-style:normal;color:var(--sesame)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.fine{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font-size:13px;color:var(--sesame);letter-spacing:.01em}
+.fine li{display:inline-flex;align-items:center;gap:8px}
+.fine li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--shroom)}
+
+/* ---------- film (arch player) ---------- */
+.film-col{container-type:inline-size;display:grid;justify-items:center;gap:16px;min-width:0}
+.arch-frame{--w:min(372px, 80cqi);--pad:12px;position:relative;width:calc(var(--w) + var(--pad) * 2);padding:var(--pad);
+  background:var(--oat);border:1px solid var(--mocha);
+  border-radius:calc(var(--w) / 2 + var(--pad)) calc(var(--w) / 2 + var(--pad)) 30px 30px;
+  box-shadow:0 44px 80px -36px rgba(160,138,127,.55),0 2px 6px rgba(34,34,35,.04);
+  transition:border-radius .9s cubic-bezier(.2,.75,.2,1)}
+.arch{position:relative;display:block;width:var(--w);max-width:100%;aspect-ratio:9/16;overflow:hidden;cursor:pointer;
+  border-radius:calc(var(--w) / 2) calc(var(--w) / 2) 18px 18px;background:var(--watermelon);transform:translateZ(0);
+  transition:border-radius .9s cubic-bezier(.2,.75,.2,1)}
+.arch-frame.is-open{border-radius:30px}
+.arch-frame.is-open .arch{border-radius:18px}
+.arch > video,.arch .poster,.arch .layer{position:absolute;inset:0;width:100%;height:100%}
+.arch > video{object-fit:cover;background:var(--vault)}
+.arch .poster svg{display:block;width:100%;height:100%}
+.layer{pointer-events:none;opacity:0;transition:opacity .12s linear}
+.chaos-layer{background:var(--vault)}
+.arch[data-scene="chaos"] .chaos-layer{opacity:1}
+.mini{position:absolute;padding:8px 9px;font:600 clamp(11px,3.6cqi,14px)/1.2 var(--font);color:var(--vault);box-shadow:0 8px 16px rgba(0,0,0,.4)}
+.mini.help{left:12%;top:24%;rotate:-5deg;background:var(--white);font-size:clamp(22px,8cqi,34px);padding:10px 14px}
+.mini.m1{left:52%;top:16%;rotate:6deg;background:var(--butter)}
+.mini.m2{left:46%;top:44%;rotate:-7deg;background:var(--peach)}
+.mini.m3{left:16%;top:56%;rotate:4deg;background:var(--flamingo)}
+.end-layer{display:grid;place-items:start center;padding-top:22%}
+.arch[data-scene="end"] .end-layer{opacity:1}
+.end-line{margin:0;padding:10px 16px;border-radius:12px;background:rgba(34,34,35,.86);color:var(--white);
+  font:600 clamp(20px,7cqi,30px)/1 var(--font);letter-spacing:-.02em}
+.end-line span{color:var(--flamingo)}
+.end-logo{display:none;width:132px;height:29px;margin-top:16px;color:var(--vault)}
+.arch.logo-on .end-logo{display:block}
+.end-layer > div{display:grid;justify-items:center}
+
+.big-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:84px;height:84px;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;background:var(--butter);color:var(--vault);border:1px solid rgba(34,34,35,.16);
+  box-shadow:0 14px 32px -10px rgba(34,34,35,.35);transition:scale .15s ease}
+.big-play:hover{scale:1.05}
+.big-play svg{margin-left:4px}
+.play-label{position:absolute;left:50%;top:calc(50% + 58px);translate:-50% 0;padding:6px 11px;border-radius:999px;white-space:nowrap;
+  background:rgba(255,255,255,.86);font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.has-started .big-play,.has-started .play-label{display:none}
+
+.mode{position:absolute;top:12px;left:12px;right:12px;display:none;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
+.has-started:not(.is-real) .mode{display:flex}
+.chip{display:inline-block;padding:6px 9px;border-radius:999px;font:600 10px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.chip.preview{background:var(--butter);color:var(--vault)}
+.chip.scene{background:rgba(34,34,35,.78);color:var(--white);text-align:right}
+
+.cap{position:absolute;left:50%;bottom:21%;translate:-50% 0;width:max-content;max-width:86%;margin:0;padding:8px 12px;border-radius:10px;text-align:center;
+  background:rgba(34,34,35,.84);color:var(--white);font:600 clamp(14px,4.6cqi,17px)/1.3 var(--font);pointer-events:none}
+
+.controls{position:absolute;left:10px;right:10px;bottom:10px;display:none;align-items:center;gap:6px;padding:5px 10px 5px 5px;border-radius:14px;
+  background:rgba(34,34,35,.78);color:var(--white);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:default}
+.has-started .controls{display:flex}
+.ctrl{flex:none;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:10px;background:transparent;color:inherit;cursor:pointer}
+.ctrl:hover{background:rgba(255,255,255,.14)}
+.real-only{display:none}
+.is-real .real-only{display:grid}
+.seek{flex:1;min-width:0;height:20px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer}
+.seek::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--flamingo) var(--p,0%),rgba(255,255,255,.3) var(--p,0%))}
+.seek::-moz-range-track{height:4px;border-radius:2px;background:rgba(255,255,255,.3)}
+.seek::-moz-range-progress{height:4px;border-radius:2px;background:var(--flamingo)}
+.seek::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;margin-top:-5px;border-radius:50%;background:var(--white);border:0}
+.seek::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--white);border:0}
+.time{font:500 11px/1 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.film-meta{margin:0;font:500 12px/1.4 var(--mono);letter-spacing:.04em;color:var(--sesame);text-align:center}
+.script{width:min(400px,100%)}
+.script summary{cursor:pointer;list-style:none;display:flex;justify-content:center;align-items:center;gap:8px;min-height:40px;font-size:14px;font-weight:450}
+.script summary::-webkit-details-marker{display:none}
+.script summary svg{transition:rotate .2s}
+.script[open] summary svg{rotate:180deg}
+.script ol{list-style:none;margin:8px 0 0;padding:6px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid rgba(228,226,222,.85);max-height:280px;overflow:auto}
+.script button{display:flex;gap:12px;width:100%;padding:8px 10px;border:0;border-radius:10px;background:transparent;text-align:left;cursor:pointer;font:350 14px/1.35 var(--font);color:var(--vault)}
+.script button:hover{background:var(--oat)}
+.script .tc{flex:none;font:500 12px/1.6 var(--mono);color:var(--sesame);font-variant-numeric:tabular-nums}
+
+/* ---------- section scaffolding ---------- */
+.section{padding-block:clamp(56px,8vw,112px)}
+.section-head{display:grid;gap:18px;max-width:780px;margin-bottom:clamp(28px,4vw,48px)}
+.stack{display:grid;gap:20px;justify-items:start;min-width:0}
+
+/* ---------- chaos vs zen ---------- */
+.versus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.panel{position:relative;overflow:hidden;min-width:0;min-height:480px;display:flex;flex-direction:column;gap:14px;
+  padding:clamp(20px,2.6vw,32px);border-radius:var(--r-card)}
+.panel-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}
+.panel h3{font-size:22px;font-weight:450;letter-spacing:-.01em}
+.clock{padding:6px 10px;border-radius:999px;font:500 12px/1 var(--mono);font-variant-numeric:tabular-nums}
+.panel .sub{margin:0;font-size:15px;max-width:38ch}
+.badge{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chaos{background:var(--vault);color:var(--white)}
+.chaos .clock{background:rgba(255,255,255,.1)}
+.chaos .sub{color:rgba(255,255,255,.74)}
+.chaos .badge{background:rgba(192,57,43,.22);color:#F6B3AA}
+.notes{position:relative;flex:1;min-height:320px}
+.note{position:absolute;left:var(--x);top:var(--y);rotate:var(--r);width:clamp(112px,34%,170px);margin:0;padding:12px 12px 14px;
+  font:600 clamp(13px,1.2vw,15px)/1.25 var(--font);color:var(--vault);box-shadow:0 12px 22px rgba(0,0,0,.38)}
+.note.help{width:clamp(150px,44%,220px);padding:16px 16px 14px;background:var(--white);
+  font-size:clamp(32px,3.6vw,46px);letter-spacing:.02em;line-height:1}
+.note.help small{display:block;margin-top:8px;font:500 11px/1.3 var(--mono);letter-spacing:.02em;color:var(--sesame)}
+.n-butter{background:var(--butter)}.n-peach{background:var(--peach)}.n-flamingo{background:var(--flamingo)}
+.n-vanilla{background:var(--vanilla)}.n-melon{background:var(--watermelon)}
+.chaos:hover .note,.chaos:focus-within .note{animation:tremble .14s linear 4 alternate;animation-delay:var(--d,0s)}
+@keyframes tremble{from{translate:-1.5px 0}to{translate:1.5px 1px}}
+.zen{background:rgba(255,255,255,.72);border:1px solid rgba(228,226,222,.85);
+  box-shadow:0 12px 48px rgba(34,34,35,.045),0 2px 6px rgba(34,34,35,.02);-webkit-backdrop-filter:blur(24px) saturate(1.4);backdrop-filter:blur(24px) saturate(1.4)}
+.zen .clock{background:var(--oat)}
+.zen .sub{color:var(--sesame)}
+.zen .badge{background:rgba(7,93,68,.12);color:var(--tender)}
+.zen blockquote{margin:6px 0 0;font-size:clamp(26px,2.7vw,36px);font-weight:350;letter-spacing:-.015em;line-height:1.12;text-wrap:balance}
+.status{list-style:none;margin:auto 0 0;padding:0;display:grid}
+.status li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 0;border-top:1px solid var(--line);font-size:15px}
+.status .k{color:var(--sesame)}
+.status .v{display:inline-flex;align-items:center;gap:8px;font-weight:450;text-align:right}
+.status .v svg{flex:none;color:var(--tender)}
+
+/* ---------- tortoise + cairn ---------- */
+.how{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,6vw,96px);align-items:center}
+.cairn-wrap{display:grid;justify-items:center;gap:18px;min-width:0}
+.cairn{width:min(470px,100%);display:flex;flex-direction:column;align-items:center;padding-top:52px}
+.stones{position:relative;z-index:1;list-style:none;margin:0;padding:0;width:100%;display:flex;flex-direction:column-reverse;align-items:center;gap:3px}
+.stone{position:relative;width:var(--w);min-width:fit-content;min-height:50px;display:grid;place-items:center;padding:8px 16px;
+  white-space:nowrap;text-align:center;font-size:clamp(13.5px,1.25vw,15.5px);font-weight:450;color:var(--vault);
+  background:var(--c);border:1px solid rgba(160,138,127,.5);border-radius:var(--shape);rotate:var(--r,0deg);translate:var(--x,0px) 0;
+  box-shadow:inset 0 -7px 0 rgba(34,34,35,.05),0 10px 16px -10px rgba(110,107,102,.55)}
+.s1{--w:54%;--c:var(--mocha);--r:-1.5deg;--shape:46% 54% 48% 52% / 64% 60% 40% 36%}
+.s2{--w:48%;--c:var(--oat);--r:1.2deg;--x:8px;--shape:52% 48% 50% 50% / 58% 62% 38% 42%}
+.s3{--w:42%;--c:var(--peach);--r:-2deg;--x:-8px;--shape:48% 52% 46% 54% / 62% 58% 42% 38%}
+.s4{--w:37%;--c:var(--butter);--r:1.6deg;--x:5px;--shape:50% 50% 52% 48% / 60% 64% 36% 40%}
+.s5{--w:33%;--c:var(--watermelon);--r:-1deg;--x:-4px;--shape:47% 53% 50% 50% / 62% 60% 40% 38%}
+.s6{--w:28%;--c:var(--flamingo);--r:2deg;--x:2px;--shape:50% 50% 48% 52% / 66% 62% 38% 34%;font-weight:600}
+.s6 .tag{position:absolute;bottom:calc(100% + 14px);left:50%;translate:-50% 0;rotate:calc(var(--r) * -1);white-space:nowrap;
+  padding:7px 12px;border-radius:999px;background:var(--vault);color:var(--white);font:600 12.5px/1 var(--font);letter-spacing:.02em}
+.s6 .tag::after{content:"";position:absolute;left:50%;top:100%;translate:-50% 0;border:6px solid transparent;border-top-color:var(--vault)}
+.tortoise{position:relative;z-index:0;display:block;width:100%;height:auto;margin-top:calc(-10% - 6px)}
+.cairn.armed .stone{opacity:0;translate:var(--x,0px) -30px}
+.cairn.armed.play .stone{animation:drop .24s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * 120ms)}
+@keyframes drop{to{opacity:1;translate:var(--x,0px) 0}}
+
+/* ---------- sales ---------- */
+.sales{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(32px,5vw,72px);align-items:center}
+.pull{margin:0;font-size:clamp(20px,1.8vw,24px);font-style:italic;font-weight:350;line-height:1.4;max-width:30ch}
+.chart-card{min-width:0;padding:clamp(16px,2vw,24px);border-radius:var(--r-card);background:var(--white);border:1px solid var(--line);
+  box-shadow:0 24px 60px -34px rgba(160,138,127,.5)}
+.chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.chart-head h3{font-size:15px;font-weight:600}
+.chart-head span{font-size:12px;color:var(--sesame)}
+.plot{position:relative}
+.plot svg{display:block;width:100%;height:auto}
+.plot .grid line{stroke:var(--line);stroke-width:1}
+.plot .base{stroke:var(--mocha);stroke-width:1.5}
+.plot .marker{stroke:var(--sesame);stroke-width:1.2;stroke-dasharray:4 5}
+.plot .band{fill:none;stroke:var(--flamingo);stroke-width:12;stroke-linecap:round}
+.plot .core{fill:none;stroke:var(--vault);stroke-width:2.5;stroke-linecap:round}
+.plot .dot{fill:var(--flamingo);stroke:var(--vault);stroke-width:2}
+.your-sales{position:absolute;left:62%;top:23%;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:999px;
+  background:var(--vault);color:var(--white);font:600 13px/1 var(--font);white-space:nowrap}
+.bf-label{position:absolute;right:15.5%;top:3%;font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sesame)}
+.x-axis{position:relative;height:22px;margin-top:4px}
+.x-axis span{position:absolute;top:0;translate:-50% 0;font:500 11.5px/1 var(--mono);color:var(--sesame);white-space:nowrap}
+.chart-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin-top:10px;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--sesame)}
+.chart.armed .band,.chart.armed .core{stroke-dasharray:1000;stroke-dashoffset:1000}
+.chart.armed .dot,.chart.armed .your-sales{opacity:0}
+.chart.armed.play .band,.chart.armed.play .core{transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1);stroke-dashoffset:0}
+.chart.armed.play .dot,.chart.armed.play .your-sales{transition:opacity .3s ease 1.2s;opacity:1}
+
+/* ---------- talk (form) ---------- */
+.talk{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,5vw,72px);align-items:start}
+.two-tone{color:var(--sesame)}
+.two-tone span{color:var(--vault)}
+.win{display:inline-flex;align-items:center;gap:14px;max-width:100%;padding:8px 26px 8px 9px;border-radius:999px;border:2px solid var(--vault);
+  background:linear-gradient(90deg,#FFF7BD,#FFC4B0 55%,#F9BBDD);color:var(--vault);font-size:clamp(17px,1.6vw,21px);font-weight:400;letter-spacing:-.005em;line-height:1.2}
+.win svg{flex:none}
+.cushions{display:flex;align-items:flex-end;gap:4px;margin-top:6px}
+.cushions figure{margin:0;display:grid;justify-items:center;gap:8px}
+.cushions svg{display:block;height:auto}
+.cushions .dog{width:min(200px,44vw)}
+.cushions .empty{width:min(170px,38vw)}
+.cushions figcaption{font:500 11.5px/1.3 var(--mono);color:var(--sesame);letter-spacing:.04em}
+.yours{display:inline-block;padding:5px 10px;border-radius:999px;background:var(--vault);color:var(--white);font:600 12px/1 var(--font)}
+
+.form-card{min-width:0;padding:clamp(22px,3vw,40px);border-radius:var(--r-card);background:var(--white);border:1px solid var(--line);
+  box-shadow:0 30px 70px -40px rgba(160,138,127,.6)}
+.form-card h3{font-size:22px;font-weight:450;letter-spacing:-.01em}
+.form-card .hint{margin:6px 0 0;font-size:14px;color:var(--sesame)}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+.field{display:grid;gap:6px;align-content:start;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;font-weight:450}
+.req{color:var(--negative)}
+.field input,.field select,.field textarea{width:100%;min-height:46px;padding:11px 12px;border-radius:10px;border:1px solid var(--line);
+  background:var(--almond);color:var(--vault);font:350 15px/1.4 var(--font);transition:border-color .15s, box-shadow .15s}
+.field textarea{min-height:104px;resize:vertical}
+.field select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%236E6B66' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--vault);box-shadow:0 0 0 3px var(--flamingo)}
+.field [aria-invalid="true"]{border-color:var(--negative)}
+.err{margin:0;font-size:12.5px;color:var(--negative)}
+.captcha{display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:12px 14px;border-radius:10px;border:1.5px dashed var(--mocha);
+  font:500 12px/1.3 var(--mono);color:var(--sesame)}
+.form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:20px}
+.form-actions .small{font-size:12.5px;color:var(--sesame)}
+.success{display:grid;gap:14px;justify-items:start;padding-block:8px}
+.success h3{font-size:clamp(28px,3vw,38px);font-weight:450;letter-spacing:-.02em}
+.success p{margin:0;color:var(--sesame);max-width:44ch}
+.success .badge{background:var(--vanilla);color:#B45309}
+
+/* ---------- end card ---------- */
+.endcard{position:relative;overflow:hidden;display:grid;gap:22px;justify-items:start;margin-block:clamp(24px,4vw,48px) 28px;
+  padding:clamp(40px,7vw,96px) clamp(24px,5vw,72px);border-radius:var(--r-hero);background:var(--vault);color:var(--white)}
+.endcard .brand-mark{display:block;width:165px;height:36px;color:var(--almond)}
+.handled{margin:0;font-size:clamp(58px,10.5vw,150px);font-weight:600;letter-spacing:-.04em;line-height:.95;
+  background:linear-gradient(90deg,#FFF7BD,#F9BBDD);-webkit-background-clip:text;background-clip:text;color:transparent}
+.endcard .lead{margin:0;font-size:clamp(18px,1.6vw,22px);color:rgba(255,255,255,.8);max-width:40ch}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;padding-block:20px 40px;border-top:1px solid var(--line);font-size:12.5px;color:var(--sesame)}
+
+/* ---------- responsive ---------- */
+@media (max-width:960px){
+  .hero,.how,.sales,.talk{grid-template-columns:minmax(0,1fr)}
+  .versus{grid-template-columns:minmax(0,1fr)}
+  .panel{min-height:440px}
+}
+@media (max-width:640px){
+  .form-grid{grid-template-columns:minmax(0,1fr)}
+  .note.hide-sm{display:none}
+  .panel{min-height:0}
+  .notes{min-height:330px}
+  .your-sales{font-size:11.5px;padding:6px 10px;left:52%;top:20%}
+  .x-axis span:nth-child(even){display:none}
+  .bf-label{font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Neato master vector logo (Vault artwork), drawn in currentColor so one source serves Vault and Almond Milk -->
+    <g id="nl-mark">
+      <path d="M122.417 66.1662C122.417 99.3534 96.0887 126.257 63.6111 126.257C31.1335 126.257 4.80527 99.3534 4.80527 66.1662C4.80527 32.9791 31.1335 6.07556 63.6111 6.07556C96.0887 6.07556 122.417 32.9791 122.417 66.1662Z" fill="none" stroke="currentColor" stroke-width="9.61055"/>
+      <path fill="currentColor" d="M78.7256 72.6831V73.8542C80.2468 74.344 81.7472 74.9402 82.1639 75.6429C82.4348 76.1114 82.4765 76.665 82.3098 77.1973C81.3512 80.3488 79.5175 83.2022 76.9543 85.4806C73.4118 88.6107 68.7857 90.3355 63.9512 90.3355C55.2408 90.3355 47.864 84.8844 45.5718 77.1973C45.4259 76.6863 45.4467 76.1114 45.7176 75.6429C46.1344 74.9402 47.6348 74.344 49.156 73.8542V72.1082H32.7562V73.8542C34.2774 74.344 35.7778 74.9402 36.1945 75.6429C36.3404 75.8984 36.4654 76.2178 36.5488 76.6011C36.5905 76.8779 36.653 77.1548 36.6946 77.4529C37.0281 79.1138 37.5282 80.7321 38.1742 82.2865C39.737 86.0768 42.1751 89.4838 45.3634 92.2732C50.4688 96.7449 57.0745 99.215 63.9512 99.215C70.8279 99.215 77.517 96.7236 82.6224 92.2094C85.8523 89.356 88.3321 85.8426 89.8741 81.9671C90.4576 80.5191 90.8952 79.0073 91.2078 77.4529C91.2703 77.176 91.312 76.8992 91.3536 76.6011C91.4578 76.2178 91.562 75.9197 91.7079 75.6642C92.1247 74.9615 93.625 74.3653 95.1462 73.8755V72.1294H78.7464V72.7257L78.7256 72.6831Z"/>
+      <path fill="currentColor" d="M64.4878 39.7626C63.1542 39.7626 62.0497 40.1672 60.9036 41.0828V56.8188C60.9036 58.7565 61.112 59.4592 63.0291 60.0767V60.7794H49.5259V60.0767C51.4639 59.4592 51.6722 58.7565 51.6722 56.8188V41.0828C51.6722 39.5709 50.672 38.5488 48.8382 38.1868L48.3381 38.0804V37.3777L60.216 33.9707H60.9036V39.358C63.0917 36.5685 65.6756 34.0346 69.0931 34.0346C74.3652 34.0346 76.6991 37.6332 76.6991 42.914V56.8188C76.6991 58.7565 76.9075 59.4592 78.8246 60.0767V60.7794H65.3214V60.0767C67.2593 59.4592 67.4677 58.7565 67.4677 56.8188V43.5103C67.4677 41.168 66.3216 39.7626 64.4878 39.7626Z"/>
+    </g>
+    <g id="nl-word" fill="currentColor">
+      <path d="M210.958 44.7594C206.311 44.7594 202.519 46.1648 198.539 49.3375V103.956C198.539 110.642 199.226 113.112 205.957 115.241V117.711H159.05V115.241C165.781 113.133 166.468 110.663 166.468 103.956V49.3375C166.468 44.0567 163.03 40.522 156.633 39.2869L154.903 38.925V36.4549L196.121 24.6582H198.539V43.3327C206.124 33.6441 215.084 24.8286 226.983 24.8286C245.258 24.8286 253.364 37.3492 253.364 55.6618V103.934C253.364 110.621 254.052 113.091 260.783 115.22V117.69H213.876V115.22C220.606 113.112 221.294 110.642 221.294 103.934V57.7698C221.294 49.6569 217.335 44.7381 210.958 44.7381V44.7594Z"/>
+      <path d="M260.969 74.5287C260.969 44.5686 279.244 24.8506 307.688 24.8506C336.133 24.8506 347.177 39.8201 347.344 63.9671H291.476C290.955 87.0494 303.896 98.1434 322.171 98.1434C331.819 98.1434 340.613 93.0329 345.281 85.1117L347.344 85.8144C344.76 103.786 332.173 120.182 306.813 120.182C275.764 120.182 260.948 97.2703 260.948 74.55L260.969 74.5287ZM316.482 59.027C316.128 48.1033 313.544 29.7695 304.75 29.7695C295.956 29.7695 292.497 44.5686 291.643 59.027H316.482Z"/>
+      <path d="M350.633 97.6099C350.633 78.403 364.595 70.8225 398.561 63.9446L404.25 62.7096V55.4911C404.25 39.2866 399.603 29.598 391.664 29.598C379.598 29.598 376.139 45.6321 381.14 55.3207L354.926 63.4336C345.09 41.2243 366.824 24.6791 395.623 24.6791C422.004 24.6791 436.32 37.5405 436.32 57.2797V95.6935C436.32 101.677 440.467 104.509 446.156 105.744L447.885 106.106V108.576L408.397 120.373H405.98L404.25 99.5902C401.499 114.219 388.204 120.373 375.285 120.373C360.448 120.373 350.633 111.217 350.633 97.6525V97.6099ZM393.393 103.423C397.873 103.423 404.25 97.9506 404.25 87.2186V68.0117L399.249 69.0764C388.725 71.5465 382.349 79.4677 382.349 89.859C382.349 97.9719 386.829 103.423 393.393 103.423Z"/>
+      <path d="M484.608 27.3198H509.093V32.2599H484.608V90.9452C484.608 99.3988 489.609 107.341 498.236 107.341C502.549 107.341 505.654 105.404 508.926 103.466L510.301 105.233C505.467 111.579 497.027 120.394 480.461 120.394C463.894 120.394 452.516 109.833 452.516 92.2015V32.2386H443.035V29.7685L482.19 0H484.608V27.3198Z"/>
+      <path d="M508.24 74.5279C508.24 45.1001 528.245 24.6582 557.044 24.6582C585.842 24.6582 604.805 43.5031 604.805 70.6525C604.805 100.08 584.8 120.331 556.002 120.331C527.203 120.331 508.24 101.656 508.24 74.5279ZM559.794 115.412C568.421 115.412 572.047 102.55 572.047 82.9815C572.047 49.8486 562.733 29.5983 553.418 29.5983C544.624 29.5983 540.998 43.1624 540.998 62.1989C540.998 95.8429 550.646 115.412 559.794 115.412Z"/>
+    </g>
+    <symbol id="sym-contortionist" viewBox="0 0 200 140">
+      <rect x="18" y="131" width="164" height="7" rx="3.5" fill="#D9CEC8"/>
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#222223" stroke-width="17">
+          <path d="M42 128 C46 100 62 74 86 60"/><path d="M58 128 C60 104 72 82 92 64"/>
+          <path d="M88 62 C112 40 142 50 150 76"/>
+          <path d="M150 76 C156 98 158 114 160 128"/><path d="M146 78 C148 100 146 116 142 128"/>
+        </g>
+        <g stroke="#F9BBDD" stroke-width="12.5">
+          <path d="M42 128 C46 100 62 74 86 60"/><path d="M58 128 C60 104 72 82 92 64"/>
+          <path d="M88 62 C112 40 142 50 150 76"/>
+          <path d="M150 76 C156 98 158 114 160 128"/><path d="M146 78 C148 100 146 116 142 128"/>
+        </g>
+      </g>
+      <path d="M152 108 C155 116 158 124 163 130" fill="none" stroke="#222223" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="151" cy="100" r="12" fill="#F9F1ED" stroke="#222223" stroke-width="2.5"/>
+      <path d="M139.5 103 A12 12 0 0 0 162.5 103 Z" fill="#222223"/>
+      <path d="M144.5 97 q3 -2.5 6 0 M152.5 97 q3 -2.5 6 0" fill="none" stroke="#222223" stroke-width="1.6" stroke-linecap="round"/>
+      <ellipse cx="40" cy="129" rx="10" ry="5.5" fill="#FFFFFF" stroke="#222223" stroke-width="2.5"/>
+      <ellipse cx="58" cy="129" rx="10" ry="5.5" fill="#FFFFFF" stroke="#222223" stroke-width="2.5"/>
+      <circle cx="161" cy="129" r="5" fill="#F9F1ED" stroke="#222223" stroke-width="2.2"/>
+      <circle cx="142" cy="129" r="5" fill="#F9F1ED" stroke="#222223" stroke-width="2.2"/>
+    </symbol>
+
+    <g id="dogShape">
+      <circle cx="80" cy="92" r="28"/><circle cx="60" cy="100" r="17"/><circle cx="100" cy="100" r="17"/>
+      <circle cx="68" cy="110" r="14"/><circle cx="92" cy="110" r="14"/><circle cx="114" cy="100" r="10"/>
+      <circle cx="68" cy="117" r="8"/><circle cx="92" cy="117" r="8"/>
+      <circle cx="80" cy="54" r="23"/><circle cx="63" cy="50" r="11"/><circle cx="97" cy="50" r="11"/>
+      <circle cx="80" cy="36" r="13"/><circle cx="68" cy="66" r="11"/><circle cx="92" cy="66" r="11"/><circle cx="80" cy="70" r="12"/>
+      <path d="M62 42 L63 18 L78 33 Z"/><path d="M98 42 L97 18 L82 33 Z"/>
+    </g>
+    <symbol id="sym-dog" viewBox="0 0 160 150">
+      <rect x="14" y="112" width="132" height="30" rx="15" fill="#FFC4B0" stroke="#A08A7F" stroke-width="2.5"/>
+      <path d="M80 115 V139" stroke="#A08A7F" stroke-width="2" stroke-dasharray="3 4" stroke-linecap="round"/>
+      <use href="#dogShape" fill="#A08A7F" stroke="#A08A7F" stroke-width="5" stroke-linejoin="round"/>
+      <use href="#dogShape" fill="#FFFFFF"/>
+      <path d="M66 36 L66.5 24 L74 32 Z M94 36 L93.5 24 L86 32 Z" fill="#F9BBDD"/>
+      <circle cx="66" cy="62" r="4" fill="#F9BBDD"/><circle cx="94" cy="62" r="4" fill="#F9BBDD"/>
+      <path d="M68 53 q4 3.5 8 0 M84 53 q4 3.5 8 0" fill="none" stroke="#222223" stroke-width="2.2" stroke-linecap="round"/>
+      <ellipse cx="80" cy="61" rx="4.2" ry="3.2" fill="#222223"/>
+      <path d="M76.5 65.5 q3.5 3.5 7 0" fill="none" stroke="#222223" stroke-width="1.8" stroke-linecap="round"/>
+    </symbol>
+
+    <symbol id="sym-tortoise" viewBox="0 0 260 130">
+      <g fill="#F9F1ED" stroke="#6E6B66" stroke-width="2.5" stroke-linejoin="round">
+        <path d="M52 100 L32 110 L54 112 Z"/>
+        <rect x="62" y="94" width="28" height="30" rx="12"/><rect x="170" y="94" width="28" height="30" rx="12"/>
+        <rect x="94" y="100" width="22" height="24" rx="10"/><rect x="146" y="100" width="22" height="24" rx="10"/>
+        <path d="M206 92 C214 78 236 72 248 84 C258 94 254 110 238 112 C226 113 214 108 206 102 Z"/>
+      </g>
+      <circle cx="238" cy="90" r="3" fill="#222223"/>
+      <path d="M241 101 q6 2 10 -3" fill="none" stroke="#6E6B66" stroke-width="2" stroke-linecap="round"/>
+      <path d="M44 106 C48 54 92 26 130 26 C170 26 212 54 216 106 Z" fill="#D9CEC8" stroke="#6E6B66" stroke-width="2.5" stroke-linejoin="round"/>
+      <g fill="none" stroke="#A08A7F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M106 102 L113 70 L130 58 L147 70 L154 102"/>
+        <path d="M113 70 L90 58"/><path d="M147 70 L170 58"/><path d="M130 58 V30"/>
+        <path d="M66 96 L104 86"/><path d="M194 96 L156 86"/>
+      </g>
+      <rect x="38" y="100" width="184" height="12" rx="6" fill="#A08A7F" stroke="#6E6B66" stroke-width="2.5"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+  <nav class="nav" aria-label="Page">
+    <a class="logo" href="#top" aria-label="Neato">
+      <svg viewBox="0 0 605 132" aria-hidden="true"><use href="#nl-mark"/><use href="#nl-word"/></svg>
+    </a>
+    <a class="btn btn-cta" href="#talk">Talk To Neato &rarr;</a>
+  </nav>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero" aria-labelledby="hero-h">
+      <div class="hero-copy">
+        <h1 id="hero-h">You Stay<br>Zen<span class="dot">.</span></h1>
+        <p class="lede">Deal days can be chaotic for Amazon brands. <em>Neato's brand partners?</em> They know zen.</p>
+        <p class="body-lg">We buy your inventory, own the P&amp;L and run Amazon end to end, so Black Friday and Cyber Monday happen without the panic.</p>
+        <div class="cta-row">
+          <a class="btn btn-cta" href="#talk">Talk To Neato &rarr;</a>
+          <button class="btn btn-ghost" type="button" id="watchBtn">
+            <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z" fill="currentColor"/></svg>
+            Watch The Film
+          </button>
+        </div>
+        <ul class="fine"><li>No packages</li><li>No add-ons</li><li>No surprise fees</li></ul>
+      </div>
+
+      <div class="film-col" id="film">
+        <div class="arch-frame" id="archFrame">
+          <div class="arch" id="arch" data-scene="zen">
+            <video id="zenFilm" playsinline preload="metadata" hidden aria-label="You Stay Zen campaign film">
+              <!-- Add the final file here, e.g. <source src="you-stay-zen-hero-v04.mp4" type="video/mp4"> -->
+            </video>
+
+            <div class="poster">
+              <svg viewBox="0 0 360 640" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Poster illustration: a contortionist in a backbend centered under a stone arch, a white dog on a cushion and a gong in a sunny courtyard">
+                <rect width="360" height="640" fill="#FFEEF8"/>
+                <circle cx="238" cy="230" r="60" fill="#FFF7BD"/>
+                <path d="M0 436 C60 410 120 420 180 408 C240 396 300 414 360 402 V470 H0 Z" fill="#F9F1ED"/>
+                <g fill="#D9CEC8" stroke="#A08A7F" stroke-width="1.5">
+                  <path d="M58 466 C40 416 44 300 64 226 C84 300 88 416 70 466 Z"/>
+                  <path d="M98 466 C86 428 88 350 102 300 C116 350 118 428 108 466 Z"/>
+                  <path d="M296 466 C278 406 282 280 304 206 C326 280 330 406 312 466 Z"/>
+                </g>
+                <g fill="#F9BBDD"><circle cx="258" cy="440" r="14"/><circle cx="274" cy="430" r="11"/><circle cx="246" cy="430" r="9"/><circle cx="268" cy="450" r="10"/></g>
+                <rect x="0" y="454" width="360" height="24" fill="#E4E2DE"/>
+                <rect x="0" y="478" width="360" height="162" fill="#F9F1ED"/>
+                <path d="M180 478 L40 640 M180 478 L320 640" stroke="#E4E2DE" stroke-width="1.5"/>
+                <g fill="#FFFFFF" stroke="#D9CEC8" stroke-width="2">
+                  <polygon points="124,566 236,566 256,616 104,616"/>
+                  <polygon points="22,556 96,556 84,602 2,602"/>
+                  <polygon points="264,556 338,556 358,602 276,602"/>
+                </g>
+                <rect x="30" y="562" width="50" height="14" rx="7" fill="#FFC4B0" stroke="#A08A7F" stroke-width="1.5"/>
+                <g fill="none" stroke="#A08A7F">
+                  <path d="M300 452 V384 M344 452 V384 M294 386 H350" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M312 386 V398 M332 386 V398" stroke-width="1.5"/>
+                </g>
+                <circle cx="322" cy="418" r="20" fill="#FFC4B0" stroke="#A08A7F" stroke-width="2.5"/>
+                <circle cx="322" cy="418" r="8" fill="none" stroke="#A08A7F" stroke-width="1.5"/>
+                <use href="#sym-contortionist" x="96" y="486" width="168" height="118"/>
+                <use href="#sym-dog" x="280" y="510" width="72" height="68"/>
+              </svg>
+            </div>
+
+            <div class="layer chaos-layer" aria-hidden="true">
+              <span class="mini help">HELP!!</span>
+              <span class="mini m1">Buy Box??</span>
+              <span class="mini m2">ADS PAUSED</span>
+              <span class="mini m3">OOS by noon</span>
+            </div>
+            <div class="layer end-layer" aria-hidden="true">
+              <div><p class="end-line">Amazon. <span>Handled.</span></p><svg class="end-logo" viewBox="0 0 605 132" aria-hidden="true"><use href="#nl-mark"/><use href="#nl-word"/></svg></div>
+            </div>
+
+            <div class="mode" aria-hidden="true"><span class="chip preview">Script preview</span><span class="chip scene" id="scene">Courtyard</span></div>
+            <p class="cap" id="cap" hidden></p>
+
+            <button class="big-play" id="bigPlay" type="button" aria-label="Play the You Stay Zen film">
+              <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>
+            </button>
+            <span class="play-label" aria-hidden="true">Watch · 1:04</span>
+
+            <div class="controls" id="controls">
+              <button class="ctrl" id="btnPlay" type="button" aria-label="Play"></button>
+              <input class="seek" id="seek" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+              <span class="time" id="time">0:00 / 1:04</span>
+              <button class="ctrl real-only" id="btnMute" type="button" aria-label="Mute" aria-pressed="false">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h3l4-3v10L5 10H2z" fill="currentColor"/><path d="M11 5.5q2 2.5 0 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </button>
+              <button class="ctrl real-only" id="btnFull" type="button" aria-label="Full screen">
+                <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= CHAOS VS ZEN ================= -->
+    <section class="section" id="deal-days" aria-labelledby="dd-h">
+      <div class="section-head">
+        <h2 class="display-s two-tone" id="dd-h">Chaos <span>shouldn't be a part of Amazon deal days.</span></h2>
+      </div>
+
+      <div class="versus">
+        <article class="panel chaos" aria-labelledby="chaos-h" tabindex="0">
+          <div class="panel-top"><h3 id="chaos-h">The Other Guys</h3></div>
+          <p class="sub">Panic and chaos ensues when someone realizes they have lost the Buy Box.</p>
+          <div class="notes">
+            <p class="note help" style="--x:3%;--y:3%;--r:-4deg">HELP!!</p>
+            <p class="note n-butter" style="--x:54%;--y:0%;--r:5deg;--d:.03s">Buy Box gone??</p>
+            <p class="note n-butter hide-sm" style="--x:28%;--y:37%;--r:8deg;--d:.02s">call me back ASAP</p>
+            <p class="note n-peach" style="--x:60%;--y:32%;--r:-6deg;--d:.06s">WHO PAUSED THE ADS</p>
+            <p class="note n-flamingo" style="--x:4%;--y:54%;--r:3deg;--d:.05s">OOS by noon?!</p>
+            <p class="note n-vanilla hide-sm" style="--x:32%;--y:58%;--r:-2deg;--d:.04s">Lightning Deal ends at 3. Which one??</p>
+            <p class="note n-melon" style="--x:63%;--y:60%;--r:7deg;--d:.07s">PO stuck at the FC</p>
+          </div>
+        </article>
+
+        <article class="panel zen" aria-labelledby="zen-h">
+          <div class="panel-top"><h3 id="zen-h">When it comes to Neato's brand partners:</h3></div>
+          <blockquote>We prefer to protect their energy.</blockquote>
+          <ul class="status">
+            <li><span class="k">Inventory</span><span class="v"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Bought by Neato</span></li>
+            <li><span class="k">Buy Box and pricing</span><span class="v"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Watched</span></li>
+            <li><span class="k">Ads and deals</span><span class="v"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Pacing to plan</span></li>
+            <li><span class="k">Stock at Amazon</span><span class="v"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Already there</span></li>
+            <li><span class="k">You</span><span class="v"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Stay Zen</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= TORTOISE / CAIRN ================= -->
+    <section class="section how" id="how" aria-labelledby="how-h">
+      <div class="stack">
+        <h2 class="display-s two-tone" id="how-h">The risk? <span>That's on us.</span></h2>
+        <p class="body-lg">With the 2P Model, Neato is the seller of record. We buy your inventory up front, then carry everything that comes with selling it on Amazon. Your growth doesn't depend on an agency, or your team staying up all night.</p>
+        <a class="btn btn-ghost" href="#talk">See If 2P Fits Your Brand</a>
+      </div>
+      <div class="cairn-wrap">
+        <div class="cairn" data-reveal>
+          <ol class="stones" aria-label="What Neato carries">
+            <li class="stone s1" style="--i:0">The inventory.</li>
+            <li class="stone s2" style="--i:1">The shop.</li>
+            <li class="stone s3" style="--i:2">The data.</li>
+            <li class="stone s4" style="--i:3">The strategy.</li>
+            <li class="stone s5" style="--i:4">The algorithm.</li>
+            <li class="stone s6" style="--i:5">The risk?<span class="tag">That's on us.</span></li>
+          </ol>
+          <svg class="tortoise" viewBox="0 0 260 130" role="img" aria-label="A tortoise carrying the stack of stones on its shell">
+            <ellipse cx="132" cy="125" rx="112" ry="4.5" fill="#D9CEC8"/>
+            <use href="#sym-tortoise" width="260" height="130"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SALES / CONTORTIONIST ================= -->
+    <section class="section sales" id="sales" aria-labelledby="sales-h">
+      <div class="stack">
+        <h2 class="display-s two-tone" id="sales-h">The only thing skyrocketing <span>should be your sales.</span></h2>
+        <p class="body-lg">Neato makes money when your products sell. No retainers to justify, no add-ons to upsell. We're watching the same line you are.</p>
+        <p class="pull">We bend over backwards on deal days, so you don't have to.</p>
+      </div>
+      <figure class="chart-card chart" data-reveal style="margin:0">
+        <div class="chart-head"><h3>Your sales, deal season</h3><span>Illustrative</span></div>
+        <div class="plot">
+          <svg viewBox="0 0 640 400" role="img" aria-label="Illustrative line chart. Your sales rise steadily through November and climb out of the frame after Black Friday. A contortionist holds a backbend beneath the line.">
+            <g class="grid"><line x1="40" x2="620" y1="100" y2="100"/><line x1="40" x2="620" y1="180" y2="180"/><line x1="40" x2="620" y1="260" y2="260"/></g>
+            <line class="base" x1="40" x2="620" y1="340" y2="340"/>
+            <line class="marker" x1="540" x2="540" y1="26" y2="340"/>
+            <use href="#sym-contortionist" x="66" y="214" width="180" height="126"/>
+            <path class="band" pathLength="1000" d="M40 318 C120 314 200 302 280 290 S420 262 470 236 S540 168 572 112 S618 22 650 -30"/>
+            <path class="core" pathLength="1000" d="M40 318 C120 314 200 302 280 290 S420 262 470 236 S540 168 572 112 S618 22 650 -30"/>
+            <circle class="dot" cx="40" cy="318" r="6"/><circle class="dot" cx="280" cy="290" r="6"/>
+            <circle class="dot" cx="470" cy="236" r="6"/><circle class="dot" cx="572" cy="112" r="6"/>
+          </svg>
+          <span class="your-sales">Your sales
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="bf-label">Black Friday</span>
+        </div>
+        <div class="x-axis" aria-hidden="true">
+          <span style="left:6.25%">Nov 2</span><span style="left:28.125%">Nov 9</span><span style="left:50%">Nov 16</span><span style="left:71.875%">Nov 23</span><span style="left:93.75%">Nov 30</span>
+        </div>
+        <figcaption class="chart-foot"><span>Illustrative only. Not real data.</span></figcaption>
+      </figure>
+    </section>
+
+    <!-- ================= TALK (FORM) ================= -->
+    <section class="section talk" id="talk" aria-labelledby="talk-h">
+      <div class="stack">
+        <h2 class="display-s two-tone" id="talk-h">Someone may panic on deal days: <span>It shouldn't be you.</span></h2>
+        <p class="body-lg">Tell us about your brand. We'll show you what Black Friday looks like when Neato owns the inventory, the shop and the risk.</p>
+        <span class="win"><svg width="33" height="34" viewBox="0 0 128 132" aria-hidden="true"><use href="#nl-mark"/></svg>We only win when you sell.</span>
+        <div class="cushions">
+          <figure>
+            <svg class="dog" viewBox="0 0 160 150" role="img" aria-label="A white fluffy dog meditating on a cushion, eyes closed"><use href="#sym-dog" width="160" height="150"/></svg>
+            <figcaption>Already zen</figcaption>
+          </figure>
+          <figure>
+            <span class="yours">Yours</span>
+            <svg class="empty" viewBox="0 96 160 54" role="img" aria-label="An empty cushion">
+              <rect x="14" y="112" width="132" height="30" rx="15" fill="#FFC4B0" stroke="#A08A7F" stroke-width="2.5"/>
+              <path d="M80 115 V139" stroke="#A08A7F" stroke-width="2" stroke-dasharray="3 4" stroke-linecap="round"/>
+            </svg>
+            <figcaption>Open seat</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="talkForm" novalidate aria-labelledby="form-h">
+          <h3 id="form-h">Tell us about your brand.</h3>
+          <div class="form-grid">
+            <div class="field">
+              <label for="f-company">Company name<span class="req" aria-hidden="true">*</span></label>
+              <input id="f-company" name="0-2/name" type="text" autocomplete="organization" required aria-describedby="e-company">
+              <p class="err" id="e-company" hidden>Add your company name.</p>
+            </div>
+            <div class="field">
+              <label for="f-website">Website URL</label>
+              <input id="f-website" name="0-2/website" type="text" inputmode="url" autocomplete="url">
+            </div>
+            <div class="field">
+              <label for="f-email">Email<span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+              <p class="err" id="e-email" hidden>Enter an email like name@yourbrand.com.</p>
+            </div>
+            <div class="field">
+              <label for="f-job">Job title</label>
+              <input id="f-job" name="jobtitle" type="text" autocomplete="organization-title">
+            </div>
+            <div class="field">
+              <label for="f-mobile">Mobile phone number</label>
+              <input id="f-mobile" name="mobilephone" type="tel" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="f-sales">Amazon Monthly Sales</label>
+              <select id="f-sales" name="annualrevenue">
+                <option value="">Please Select</option>
+                <option value="0-1">$0 - $1M/year</option>
+                <option value="1-5">$1M - $5M/year</option>
+                <option value="5-25">$5M - $25M/year</option>
+                <option value="25+">$25M+/year</option>
+                <option value="N/A">N/A</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="f-pain">Primary pain point(s) or goal(s)</label>
+              <textarea id="f-pain" name="primary_pain_points_or_goals" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="captcha" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 1.5l5 2v4c0 3.2-2.2 5.6-5 7-2.8-1.4-5-3.8-5-7v-4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+            reCAPTCHA sits here on the live form
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-cta" type="submit">Submit</button>
+            <span class="small">Review copy of the page. Submitting doesn't send anything.</span>
+          </div>
+        </form>
+        <div class="success" id="success" hidden tabindex="-1">
+          <span class="badge">Preview only · nothing was sent</span>
+          <h3>You're On The Cushion.</h3>
+          <p>On the live page this goes straight to the Neato team, and someone calm gets back to you.</p>
+          <button class="btn btn-ghost" type="button" id="editForm">Edit My Answers</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= END CARD ================= -->
+    <section class="endcard" aria-labelledby="end-h">
+      <svg class="brand-mark" viewBox="0 0 605 132" role="img" aria-label="Neato"><use href="#nl-mark"/><use href="#nl-word"/></svg>
+      <h2 class="handled" id="end-h">Amazon. Handled.</h2>
+      <p class="lead">You stay zen. We'll take it from here.</p>
+      <a class="btn btn-cta" href="#talk">Talk To Neato &rarr;</a>
+    </section>
+  </main>
+
+</div>
+
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+
+  /* ---------- film player ---------- */
+  const DUR = 63.77;
+  const CUES = [
+    [13.8,15.6,"Black Friday. Everybody's calm."],
+    [17.0,18.6,"Obviously."],
+    [18.8,20.6,"Neato's brand partners?"],
+    [20.6,22.0,"They know zen."],
+    [22.6,24.9,"We prefer to protect their energy."],
+    [25.8,27.0,"Because chaos shouldn't be a part"],
+    [27.0,28.6,"of Amazon deal days."],
+    [30.8,33.4,"The only thing skyrocketing should be your sales."],
+    [33.6,35.0,"We buy the inventory."],
+    [35.0,36.6,"We run the shop."],
+    [36.6,37.6,"The data."],
+    [37.6,38.8,"The strategy."],
+    [38.8,40.2,"The algorithm."],
+    [41.0,42.4,"The risk?"],
+    [42.4,44.2,"That's on us."],
+    [47.0,49.8,"Someone may panic on deal days."],
+    [54.6,56.2,"It shouldn't be you."],
+    [57.4,59.1,"We only win when you sell."]
+  ];
+  const SCENES = [
+    [0,13.6,'The Other Guys','chaos'],
+    [13.6,16,'Zen studio','zen'],
+    [16,17,'The Other Guys','chaos'],
+    [17,18.7,'Zen studio','zen'],
+    [18.7,25.2,'Courtyard','zen'],
+    [25.2,33.6,'Pottery studio','zen'],
+    [33.6,47,'Jungle, tortoise','zen'],
+    [47,50.2,'Contortionist','zen'],
+    [50.2,53.5,'The Other Guys','chaos'],
+    [53.5,59.2,'Contortionist','zen'],
+    [59.2,99,'Courtyard end card','end']
+  ];
+  const frame = $('archFrame'), arch = $('arch'), video = $('zenFilm'), big = $('bigPlay'), btnPlay = $('btnPlay'),
+        seek = $('seek'), timeEl = $('time'), capEl = $('cap'), sceneEl = $('scene'), btnMute = $('btnMute'), btnFull = $('btnFull');
+  const I_PLAY = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.5v11l9-5.5z" fill="currentColor"/></svg>';
+  const I_PAUSE = '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5h3v11H4zM9 2.5h3v11H9z" fill="currentColor"/></svg>';
+  const hasFile = () => !!(video.getAttribute('src') || video.querySelector('source[src]'));
+  const dur = () => (hasFile() && isFinite(video.duration) && video.duration > 0) ? video.duration : DUR;
+  const fmt = s => { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  let t = 0, playing = false, last = 0, raf = 0, endTimer = 0;
+
+  function render(time){
+    const d = dur(), p = Math.min(1, Math.max(0, time / d));
+    seek.value = String(Math.round(p * 1000));
+    seek.style.setProperty('--p', (p * 100).toFixed(2) + '%');
+    timeEl.textContent = fmt(time) + ' / ' + fmt(d);
+    if (hasFile()) return;
+    if (!frame.classList.contains('has-started')) { arch.dataset.scene = 'zen'; capEl.hidden = true; return; }
+    const cue = CUES.find(c => time >= c[0] && time < c[1]);
+    capEl.hidden = !cue;
+    if (cue) capEl.textContent = cue[2];
+    const sc = SCENES.find(s => time >= s[0] && time < s[1]) || SCENES[SCENES.length - 1];
+    sceneEl.textContent = sc[2];
+    arch.dataset.scene = sc[3];
+    arch.classList.toggle('logo-on', time >= 62);
+  }
+  function setPlaying(p){
+    playing = p;
+    btnPlay.innerHTML = p ? I_PAUSE : I_PLAY;
+    btnPlay.setAttribute('aria-label', p ? 'Pause' : 'Play');
+  }
+  function tick(now){
+    if (!playing) return;
+    t += (now - last) / 1000; last = now;
+    if (t >= DUR) { t = DUR; render(t); finish(); return; }
+    render(t);
+    raf = requestAnimationFrame(tick);
+  }
+  function play(){
+    clearTimeout(endTimer);
+    frame.classList.add('is-open', 'has-started');
+    if (hasFile()) {
+      frame.classList.add('is-real');
+      video.hidden = false;
+      const pr = video.play();
+      if (pr && pr.catch) pr.catch(() => {});
+      return;
+    }
+    if (t >= DUR) t = 0;
+    setPlaying(true);
+    render(t);
+    last = performance.now();
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(tick);
+  }
+  function pause(){
+    if (hasFile()) { video.pause(); return; }
+    setPlaying(false);
+    cancelAnimationFrame(raf);
+  }
+  function toggle(){ playing ? pause() : play(); }
+  function finish(){
+    setPlaying(false);
+    cancelAnimationFrame(raf);
+    endTimer = setTimeout(() => {
+      if (playing) return;
+      frame.classList.remove('is-open', 'has-started');
+      arch.classList.remove('logo-on');
+      t = 0; render(0);
+      big.focus({ preventScroll: true });
+    }, 1600);
+  }
+  function seekTo(time){
+    if (hasFile()) { if (isFinite(video.duration)) video.currentTime = time; }
+    else { t = Math.min(DUR, Math.max(0, time)); render(t); }
+  }
+
+  video.addEventListener('play', () => setPlaying(true));
+  video.addEventListener('pause', () => setPlaying(false));
+  video.addEventListener('timeupdate', () => render(video.currentTime));
+  video.addEventListener('loadedmetadata', () => render(video.currentTime));
+  video.addEventListener('ended', finish);
+
+  big.addEventListener('click', play);
+  btnPlay.addEventListener('click', toggle);
+  arch.addEventListener('click', e => {
+    if (e.target.closest('button, input, .controls')) return;
+    frame.classList.contains('has-started') ? toggle() : play();
+  });
+  seek.addEventListener('input', () => seekTo(seek.value / 1000 * dur()));
+  btnMute.addEventListener('click', () => {
+    video.muted = !video.muted;
+    btnMute.setAttribute('aria-pressed', String(video.muted));
+    btnMute.setAttribute('aria-label', video.muted ? 'Unmute' : 'Mute');
+  });
+  btnFull.addEventListener('click', () => {
+    const fn = video.requestFullscreen || video.webkitEnterFullscreen;
+    if (!fn) return;
+    try { const r = fn.call(video); if (r && r.catch) r.catch(() => {}); } catch (_) {}
+  });
+  const toFilm = () => $('film').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+  $('watchBtn').addEventListener('click', () => { toFilm(); play(); });
+  document.querySelectorAll('.script [data-t]').forEach(b => b.addEventListener('click', () => {
+    seekTo(parseFloat(b.dataset.t)); play(); toFilm();
+  }));
+  setPlaying(false);
+  render(0);
+
+
+  /* ---------- reveal (cairn stacking, chart draw) ---------- */
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('play'); io.unobserve(e.target); }
+    }), { threshold: .35 });
+    document.querySelectorAll('[data-reveal]').forEach(el => {
+      if (el.getBoundingClientRect().top > innerHeight * .9) { el.classList.add('armed'); io.observe(el); }
+    });
+  }
+
+  /* ---------- form (preview only) ---------- */
+  const form = $('talkForm'), success = $('success');
+  const rules = [
+    ['f-company', 'e-company', v => v.trim().length > 0],
+    ['f-email', 'e-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())]
+  ];
+  const check = (id, eid, ok) => { const el = $(id), good = ok(el.value); el.setAttribute('aria-invalid', String(!good)); $(eid).hidden = good; return good; };
+  rules.forEach(r => $(r[0]).addEventListener('blur', () => { if ($(r[0]).value) check(...r); }));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const results = rules.map(r => check(...r));
+    const bad = rules.find((r, i) => !results[i]);
+    if (bad) { $(bad[0]).focus(); return; }
+    form.hidden = true; success.hidden = false; success.focus();
+  });
+  $('editForm').addEventListener('click', () => { success.hidden = true; form.hidden = false; $('f-company').focus(); });
+})();
+</script>
+
+
+</body>
+</html>
